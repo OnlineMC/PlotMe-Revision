@@ -761,42 +761,42 @@ public class BukkitPlotListener implements Listener {
         }
     }
 
-    @EventHandler
-    public void onEntityDamagebyEntity(EntityDamageByEntityEvent event) {
-        BukkitEntity entity = new BukkitEntity(event.getDamager());
-        if (manager.isPlotWorld(entity)) {
-            if (!(event.getDamager() instanceof Player)) {
-                event.setCancelled(true);
-            } else {
-                Player player = (Player) event.getDamager();
-                BukkitPlayer bukkitPlayer = (BukkitPlayer) plugin.wrapPlayer(player);
-                boolean cantBuild = !player.hasPermission(PermissionNames.ADMIN_BUILDANYWHERE);
-                String id = manager.getPlotId(entity.getLocation());
-                if (id.isEmpty()) {
-                    if (cantBuild) {
-                        player.sendMessage(api.getUtil().C("ErrCannotBuild"));
-                        event.setCancelled(true);
-                    }
-                } else {
-                    Plot plot = manager.getPlotById(id, bukkitPlayer);
-                    if (plot == null) {
-                        if (cantBuild) {
-                            bukkitPlayer.sendMessage(api.getUtil().C("ErrCannotBuild"));
-                            event.setCancelled(true);
-                        }
-                    } else if (!plot.isAllowed(player.getName(), player.getUniqueId())) {
-                        if (cantBuild) {
-                            bukkitPlayer.sendMessage(api.getUtil().C("ErrCannotBuild"));
-                            event.setCancelled(true);
-                        }
-                    } else {
-                        plot.resetExpire(manager.getMap(bukkitPlayer).getDaysToExpiration());
-                    }
-                }
-
-            }
-        }
-    }
+//    @EventHandler
+//    public void onEntityDamagebyEntity(EntityDamageByEntityEvent event) {
+//        BukkitEntity entity = new BukkitEntity(event.getDamager());
+//        if (manager.isPlotWorld(entity)) {
+//            if (!(event.getDamager() instanceof Player)) {
+//                event.setCancelled(true);
+//            } else {
+//                Player player = (Player) event.getDamager();
+//                BukkitPlayer bukkitPlayer = (BukkitPlayer) plugin.wrapPlayer(player);
+//                boolean cantBuild = !player.hasPermission(PermissionNames.ADMIN_BUILDANYWHERE);
+//                String id = manager.getPlotId(entity.getLocation());
+//                if (id.isEmpty()) {
+//                    if (cantBuild) {
+//                        player.sendMessage(api.getUtil().C("ErrCannotBuild"));
+//                        event.setCancelled(true);
+//                    }
+//                } else {
+//                    Plot plot = manager.getPlotById(id, bukkitPlayer);
+//                    if (plot == null) {
+//                        if (cantBuild) {
+//                            bukkitPlayer.sendMessage(api.getUtil().C("ErrCannotBuild"));
+//                            event.setCancelled(true);
+//                        }
+//                    } else if (!plot.isAllowed(player.getName(), player.getUniqueId())) {
+//                        if (cantBuild) {
+//                            bukkitPlayer.sendMessage(api.getUtil().C("ErrCannotBuild"));
+//                            event.setCancelled(true);
+//                        }
+//                    } else {
+//                        plot.resetExpire(manager.getMap(bukkitPlayer).getDaysToExpiration());
+//                    }
+//                }
+//
+//            }
+//        }
+//    }
 
     @EventHandler
     public void onPlotWorldLoad(PlotWorldLoadEvent event) {
