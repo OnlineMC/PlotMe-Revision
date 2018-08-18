@@ -1,0 +1,10 @@
+usemySQL: false
+mySQLconn: jdbc:mysql://localhost:3306/minecraft
+mySQLuname: root
+mySQLpass: password
+globalUseEconomy: false
+allowWorldTeleport: true
+defaultWEAnywhere: false
+NbClearSpools: 3
+NbBlocksPerClearStep: 50000
+AdvancedLogging: false
